@@ -17,28 +17,24 @@ cd hack_agent_arena
 bash setup.sh                 # installs uv+py3.11, appworld + data, creates .env; verifies
 source .venv/bin/activate
 ```
-Then give the agent a model. It runs on [**litellm**](https://docs.litellm.ai),
-so you just set `MODEL` (as `provider/model`) and the matching key in **`.env`** —
-use whichever backend you have:
-```
-ANTHROPIC_API_KEY=...      # MODEL=anthropic/claude-haiku-4-5   (or sonnet/opus)
-GEMINI_API_KEY=...         # MODEL=gemini/gemini-2.0-flash       ← free tier
-GROQ_API_KEY=...           # MODEL=groq/llama-3.3-70b-versatile  ← free tier
-OPENROUTER_API_KEY=...     # MODEL=openrouter/...                ← some free models
-```
-**No paid key?** Sign up for a **free** tier in ~2 min, no card needed —
-[Gemini](https://aistudio.google.com), [Groq](https://console.groq.com), or
-[OpenRouter](https://openrouter.ai). The model runs in the cloud, so any laptop
-works — no GPU required.
+Then give the agent a model. **For fair scoring, everyone runs the same model:
+Groq's Llama 3.3 70B — free, fast, no billing, no card.**
 
-**Given a key by the organizers?** Set it as `ANTHROPIC_API_KEY`, use
-`MODEL=anthropic/claude-haiku-4-5`, and keep runs small (low `MAX_TASKS`, no
-runaway loops) — it's a small shared budget.
+1. Get a free key at **[console.groq.com](https://console.groq.com)** → sign in with
+   GitHub/Google → **API Keys → Create**.
+2. Put it in **`.env`**:
+   ```
+   GROQ_API_KEY=...
+   ```
+3. That's it — the agent already defaults to `MODEL=groq/llama-3.3-70b-versatile`.
+   It runs in the cloud, so any laptop works — no GPU needed.
 
-**Want fully offline?** Point `MODEL` at [Ollama](https://ollama.com)
-(`MODEL=ollama/llama3.1`) — optional, and only worth it on a strong machine; small
-local models score well below frontier ones on AppWorld. Note AppWorld itself needs
-no key at all — you can `appworld play` and hand-solve tasks offline.
+> The agent runs on [litellm](https://docs.litellm.ai), so `MODEL` is a
+> `provider/model` string. You may use a different backend while **developing**
+> (`gemini/gemini-2.0-flash`, `anthropic/claude-haiku-4-5`, `ollama/llama3.1`, …),
+> but **submitted/scored runs must use `groq/llama-3.3-70b-versatile`** so every
+> team is compared on equal footing. (AppWorld itself needs no key — you can
+> `appworld play` and hand-solve tasks offline.)
 
 ## 2. Smoke-test the starter agent (2 tasks)
 ```bash

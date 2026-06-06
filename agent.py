@@ -45,7 +45,7 @@ import litellm
 # backend by setting MODEL + the matching key in .env (see README):
 #   anthropic/claude-haiku-4-5   gemini/gemini-2.0-flash   groq/llama-3.3-70b-versatile
 #   openrouter/...               ollama/llama3.1 (fully local)
-MODEL = os.environ.get("MODEL", "anthropic/claude-haiku-4-5")
+MODEL = os.environ.get("MODEL", "groq/llama-3.3-70b-versatile")
 DATASET = os.environ.get("APPWORLD_DATASET", "dev")          # dev | test_normal | test_challenge
 EXPERIMENT = os.environ.get("APPWORLD_EXPERIMENT", "team_demo")
 MAX_INTERACTIONS = int(os.environ.get("MAX_INTERACTIONS", "30"))
